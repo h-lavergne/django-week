@@ -1,4 +1,4 @@
-from .models import Job, Developer
+from .models import Job, Developer, Company
 from django.shortcuts import get_object_or_404, render
 
 
@@ -18,4 +18,10 @@ def devs(request):
     devs = Developer.objects.all()
     return render(request, 'app/devs.html', {
         "devs": devs
+    })
+
+def companies(request):
+    companies = Company.objects.all()
+    return render(request, 'app/companies.html', {
+        "companies": companies
     })
