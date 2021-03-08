@@ -5,9 +5,11 @@ from django.shortcuts import get_object_or_404, render
 def index(request):
     jobs = Job.objects.all()
     devs = Developer.objects.all()
+    companies = Company.objects.all()
     return render(request, 'app/index.html', {
         "jobs": jobs,
-        "devs": devs
+        "devs": devs,
+        "companies": companies
     })
     
 def devs(request):
@@ -24,6 +26,9 @@ def jobs(request):
     
 def companies(request):
     companies = Company.objects.all()
-    return render(request, 'app/companies.html', {
+    return render(request, 'app/companies/index.html', {
         "companies": companies
     })
+    
+def about(request):
+    return render(request, 'app/about.html')
