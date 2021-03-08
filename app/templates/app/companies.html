@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "./base.html" %}
 
 {% block title %}Django app - Home page{% endblock %}
 
@@ -19,7 +19,7 @@
   <div class="row no-gutters py-4 d-flex justify-content-center">
       <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
           <div class="card shadow rounded-lg">
-            <a href="/jobs" class="card-body text-center">
+            <a href="#" class="card-body text-center">
               <p><i class="grey-text fas fa-graduation-cap fa-3x"></i></p>
                   <h4 class="grey-text">Jobs</h4>
             </a>
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
           <div class="card shadow rounded-lg">
-            <a href="/companies" class="card-body text-center">
+            <a href="#" class="card-body text-center">
               <p><i class="grey-text far fa-calendar-alt fa-3x"></i></p>
                   <h4 class="grey-text">Companies</h4>
             </a>
@@ -35,7 +35,7 @@
       </div>
       <div class="col-md-3 col-sm-6 pb-3 px-2 card-mobile">
           <div class="card shadow rounded-lg">
-            <a href="/devs" class="card-body text-center">
+            <a href="#" class="card-body text-center">
               <p><i class="grey-text fas fa-book fa-3x"></i></p>
                   <h4 class="grey-text">Developers</h4>              
             </a>
@@ -45,21 +45,22 @@
   </div>
 </div>
 
-{% for dev in devs %}
+{% for company in companies %}
 <div class="container-fluid mb-4">
-  <div class="card shadow big" style="border-radius: 12px">
-      <div class="card-body p-2 my-4">
-          <div class="container-fluid d-flex align-items-center justify-content-between px-5">
-              <div>
-                  <h1>{{ dev }}</h1>
-                  <h4>{{ dev.title }}</h4>
-                  <p class="lead mt-2">{{ dev.phone_number }}<p>
-              </div>
-              <a href="/dev/{{ dev.id }}/" class="btn btn-success" style="min-width: 150px;">View more</a>
-          </div>
-      </div>
-  </div>
+    <div class="card shadow big" style="border-radius: 12px">
+        <div class="card-body p-2 my-4">
+            <div class="container-fluid d-flex align-items-center justify-content-between px-5">
+                <div>
+                    <h1>{{ company.denomination }}</h1>
+                    <p class="lead mt-2">{{ company.siren }}<p>
+                </div>
+                <a href="/company/{{ company.id }}/" class="btn btn-success" style="min-width: 150px;">View more</a>
+        
+            </div>
+        </div>
+    </div>
 </div>
 {% endfor %}
+
 
 {% endblock %}
