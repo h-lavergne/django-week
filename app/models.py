@@ -23,3 +23,10 @@ class Developer(models.Model):
     title = models.CharField(max_length=200)
     def __str__(self):
         return self.first_name + ' ' + self.last_name
+
+class Company(models.Model):
+    denomination = models.CharField(max_length=100)
+    siren = models.CharField(max_length=9)
+    address = models.CharField(max_length=200)
+    def __str__(self):
+        return self.denomination
