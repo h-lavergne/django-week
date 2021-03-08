@@ -1,0 +1,18 @@
+{% extends "../base.html" %}
+
+{% block title %}Django app - Home page{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{job.title}}/h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ job.company }}</h6>
+          <p class="card-text">{{job.description}}</p>
+          <a href="#" class="btn btn-success">Apply !</a>
+          <a href="/" class="btn btn-danger">Back</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
