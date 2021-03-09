@@ -64,11 +64,11 @@
 <a href="/jobs" class="text-success mt-3">Check all the jobs</a>
 </div>
 
-<div class="container-fluid row no-gutters my-5">
+<div class="container-fluid row my-5">
   <h2 class="text-success">Developers</h2>
   {% for dev in devs %}
     {% if forloop.counter <= 3 %}
-      <div class="card shadow col-lg-4 mx-1 col-md-3 col-sm-10 col-10" style="border-radius: 12px">
+      <div class="card shadow col-lg mx-1 col-md-3 col-sm-10 col-10" style="border-radius: 12px">
           <div class="card-body p-2 my-4">
               <div>
                   <h2>{{ dev }}</h1>

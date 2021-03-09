@@ -1,4 +1,6 @@
 from django.db import models
+from django import forms
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=200)
@@ -30,3 +32,17 @@ class Company(models.Model):
     address = models.CharField(max_length=200)
     def __str__(self):
         return self.denomination
+    
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length = 400)
+    message = models.TextField()
+    def __str__(self):
+        return self.email + ' - ' + self.subject     
+        
+class ContactForm(forms.ModelForm):
+    name = forms.CharField(error_messages={'required': 'Please let us know what to call you!'})
+    class Meta :
+        model = Contact
+        fields = '__all__'
