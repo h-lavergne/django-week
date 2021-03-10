@@ -1,19 +1,14 @@
 from django.db import models
 from django import forms
+from django.contrib.auth.models import User
 
-
-class User(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
-    phone_number = models.CharField(max_length=200)
-    
-    def __str__(self):
-        return self.first_name + ' ' + self.last_name
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    role = models.CharField(max_length=100)
 
 class Job(models.Model):
     title = models.CharField(max_length=200)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
     company = models.CharField(max_length=50)
     def __str__(self):
         return self.title + ' - ' + self.company
@@ -42,7 +37,27 @@ class Contact(models.Model):
         return self.email + ' - ' + self.subject     
         
 class ContactForm(forms.ModelForm):
-    name = forms.CharField(error_messages={'required': 'Please let us know what to call you!'})
     class Meta :
         model = Contact
+        fields = ['name', 'email', 'subject', 'message']
+        
+class RegisterForm(forms.ModelForm):
+    role = models.CharField(max_length=100)
+    class Meta :
+        model = User
+        fields = '__all__'
+   
+class CompanyForm(forms.ModelForm):
+    class Meta :
+        model = Company
+        fields = '__all__' 
+        
+class DeveloperForm(forms.ModelForm):
+    class Meta :
+        model = Developer
+        fields = '__all__'
+        
+class JobForm(forms.ModelForm):
+    class Meta :
+        model = Job
         fields = '__all__'

@@ -182,10 +182,6 @@ a.card-body:hover {
   border-bottom: 2px solid #fff !important;
 }
 
-p {
-  font-size: 15px !important;
-}
-
 .error-message {
   width: 300px;
   border-radius: 15px;
@@ -198,4 +194,16 @@ p {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.anonymous-margin {
+  margin-top: 6rem !important;
+}
+
+.messages-session {
+  position: absolute !important;
+  top: 10%;
+  left: 1%;
+  width: 300px;
+  border-radius: 15px;
 }
