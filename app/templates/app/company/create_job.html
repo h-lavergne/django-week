@@ -1,0 +1,52 @@
+{% extends "../base.html" %}
+
+{% block title %}Django app - Company{% endblock %}
+
+{% block content %} 
+
+<form action="" method="POST" class="container">
+    {% csrf_token %}
+    <div class="card shadow my-3 p-3">
+        <h3 class="display-6 text-center text-success"> <a href="/" class="text-success"> << Jobs list</a> / Create Job</h3>
+        <div class="card-body">
+            <div class="row no-gutters">
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Title</label>
+                        <input type="text" required {% if user.dev %} disabled {% endif %} class="shadow form-control" name="title">
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Description</label>
+                        <textarea rows="5" required class="form-control shadow" {% if user.dev %} disabled {% endif %} name="description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Company hiring</label>
+                        <input type="text" disabled class="shadow form-control" name="company" {% if user.dev %} value="{{ job.company.name }}" {% else %} value="{{ user.company.name }}" {% endif %} >
+                    </div>
+                </div>
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Duration (months)</label>
+                        <input type="text" {% if user.dev %} disabled {% endif %} class="shadow form-control" name="duration" required>
+                    </div>
+                </div>
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Salary (per day)</label>
+                        <input type="number" {% if user.dev %} disabled {% endif %} class="shadow form-control" name="salary" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success my-3" type="submit">Create</button>
+    </div>
+</form>
+{% endblock %}

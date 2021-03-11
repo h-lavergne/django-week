@@ -7,46 +7,16 @@
 <form action="" method="POST" class="container">
     {% csrf_token %}
     <h3 class="display-6 text-center text-white">Registration</h3>
-    <div class="card shadow my-3 p-3">
+    <div class="card shadow my-3 p-5">
+        <h2 class="text-success text-center display-6 my-3">Choose your profile type</h2>
         <div class="card-body">
-            <div class="row no-gutters">
-                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
-                    <div class="form-group">
-                        <label for="text" class="mb-2">Username</label>
-                        <input type="text" required class="shadow form-control" name="username" placeholder="Your full name">
-                    </div>
-        
+            <div class="row no-gutters d-flex justify-content-center">
+                <div class="col d-flex justify-content-center">
+                    <a href="company" class="btn btn-success lead p-4">I'm a company !</a>
                 </div>
-                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
-                    <div class="form-group">
-                        <label for="text" class="mb-2">Email</label>
-                        <input type="email" required class="shadow form-control" name="email" placeholder="Your email address">
-                    </div>
+                <div class="col d-flex justify-content-center">
+                    <a href="developer" class="btn btn-success lead p-4">I'm a developer !</a>
                 </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col col-lg col-sm col-xs my-2">
-                    <div class="form-group">
-                        <label for="text" class="mb-2">Role</label>
-                        <select name="role" id="" class="form-control">
-                            <option value="" selected>-- Choose your profile --</option>
-                            <option value="developer">Developer</option>
-                            <option value="company">Company</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col col-lg col-sm col-xs my-2">
-                    <div class="form-group">
-                        <label for="text" class="mb-2">Password</label>
-                        <input type="password" required class="shadow form-control" name="password" placeholder="Password">
-                    </div>
-                </div>
-            </div>
-            <a href="/login" class="text-success">You have already an account ?</a>
-            <div class="d-flex justify-content-center">
-                <button class="shadow btn btn-success mt-4 w-25 shadow" type="submit">Envoyer</button>
             </div>
         </div>
     </div>

@@ -1,0 +1,67 @@
+{% extends "../base.html" %}
+
+{% block title %}Django app - Home page{% endblock %}
+
+{% block content %}
+
+
+<table class="table table-light table-striped shadow-lg table-responsive-lg">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Duration (months)</th>
+            <th scope="col">Salary (per day)</th>
+            <th scope="col">Company</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+            <tr>
+                <th scope="row">{{ job.id }}</th>
+                <td>{{ job.title }}</td>
+                <td>{{ job.description|truncatechars:60 }}</td>
+                <td>{{ job.duration }}</td>
+                <td>{{ job.salary }}</td>
+                <td>{{ job.company.name }}</td>
+                <td class="d-flex">
+                    <a href="/job/{{ job.id }}" class="btn btn-success mr-2">Checkout</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% if jobs|length > 0 %}
+<div class="container-fluid my-4">
+    <div class="pagination">
+      <span class="step-links">
+          {% if jobs.has_previous %}
+              <a href="?page=1" class="btn btn-success">first</a>
+              <a href="?page={{ jobs.previous_page_number }}" class="btn btn-success">previous</a>
+          {% endif %}
+    
+          <span class="current mx-4">
+              Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
+          </span>
+    
+          {% if jobs.has_next %}
+              <a href="?page={{ jobs.next_page_number }}" class="btn btn-success">next</a>
+              <a href="?page={{ jobs.paginator.num_pages }}" class="btn btn-success">last</a>
+          {% endif %}
+      </span>
+    </div>
+</div>
+
+{% else %}
+
+<div class="container-fluid my-4">
+    <h2 class="text-center" style="font-weight: 300 !important;">No data found</h2>
+</div>
+
+{% endif %}
+
+{% endblock %}

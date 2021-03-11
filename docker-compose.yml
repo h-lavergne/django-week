@@ -9,6 +9,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+  
   web:
     container_name: 'django' 
     build: .
@@ -20,6 +21,14 @@ services:
       - "8000:8000"
     depends_on:
       - db
+  
+  mailhog:
+    image: mailhog/mailhog
+    container_name: 'mailhog'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
 
 volumes: 
   pgdata:

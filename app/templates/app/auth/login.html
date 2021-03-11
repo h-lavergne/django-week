@@ -12,17 +12,8 @@
             <div class="row no-gutters">
                 <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
                     <div class="form-group">
-                        <label for="text" class="mb-2">Name</label>
-                        <input type="text" required class="shadow form-control" name="username" placeholder="Your full name">
-                        {% if form.errors %}
-                            {% for field in form %}
-                                {% if field.label == 'Username' %}
-                                    <div class="alert alert-danger shadow">
-                                        <strong>{{ field.errors.0|escape }}</strong>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                        <label for="text" class="mb-2">Username</label>
+                        <input type="text" required class="shadow form-control" name="username" placeholder="Your username">
                     </div>
         
                 </div>
@@ -32,15 +23,6 @@
                     <div class="form-group">
                         <label for="text" class="mb-2">Password</label>
                         <input type="password" required class="shadow form-control" name="password" placeholder="Password">
-                        {% if form.errors %}
-                            {% for field in form %}
-                                {% if field.label == 'Password' %}
-                                    <div class="alert alert-danger shadow">
-                                        <strong>{{ field.errors|escape }}</strong>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
                     </div>
                 </div>
             </div>

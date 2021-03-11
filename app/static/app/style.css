@@ -11,6 +11,14 @@
   border-bottom: 2px solid #ffffff70;
 }
 
+td,th {
+  vertical-align: middle !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
 body { 
     background: #f4f4f4 !important; 
   }
@@ -33,7 +41,7 @@ a.nav-link {
 }
 .card:hover:not(.big) { 
   text-decoration: none; 
-  transform: translateY(-15px); 
+  transform: translateY(-10px); 
   transition: ease 0.2s; 
 }
 a.card-body {
@@ -146,6 +154,9 @@ a.card-body:hover {
   .blog-card {
     flex-direction: row;
     min-height: 130px;
+  }
+  td {
+    border: none !important;
   }
   .blog-card .meta {
     flex-basis: 30%;

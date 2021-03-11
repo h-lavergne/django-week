@@ -1,0 +1,124 @@
+{% extends "./base.html" %}
+
+{% block title %}Django app - Company{% endblock %}
+
+{% block content %} 
+
+<form action="{% if user.company %} edit {% endif %}" method="POST" class="container p-0">
+    {% csrf_token %}
+    <div class="card shadow my-3 p-3">
+        <h3 class="display-6 text-center text-success"> <a href="/" class="text-success"> << Jobs list</a> / Job Details</h3>
+        <div class="card-body">
+            <div class="row no-gutters">
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Title</label>
+                        <input type="text" {% if user.dev %} disabled {% endif %} class="shadow form-control" name="title" value="{{ job.title }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Description</label>
+                        <textarea rows="5" class="form-control shadow" {% if user.dev %} disabled {% endif %} name="description">{{ job.description }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Company hiring</label>
+                        <input type="text" disabled class="shadow form-control" name="company" {% if user.dev %} value="{{ job.company.name }}" {% else %} value="{{ user.company.name }}" {% endif %} >
+                    </div>
+                </div>
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Duration (months)</label>
+                        <input type="text" {% if user.dev %} disabled {% endif %} class="shadow form-control" name="duration" value="{{ job.duration }}">
+                    </div>
+                </div>
+                <div class="col-12 col-lg col-sm-12 col-xs-12 my-2">
+                    <div class="form-group">
+                        <label for="text" class="mb-2">Salary (per day)</label>
+                        <input type="number" {% if user.dev %} disabled {% endif %} class="shadow form-control" name="salary" value="{{ job.salary }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if user.dev %}
+            {% if user.dev in job.applications.all %}
+                {% if job.accepted_dev.user == user %}
+                    <button class="btn btn-success my-3" disabled>Application accepted !</button>
+                {% else %}
+                    <button class="btn btn-secondary my-3" disabled>Already applied...</button>
+                {% endif %}
+            {% elif job.accepted_dev %}
+                <button class="btn btn-secondary my-3" disabled>Developer already found ://</button>
+            {% else %}
+                <button class="btn btn-success my-3" type="submit">Apply now !</button>
+            {% endif %}
+        {% else %}
+            <button class="btn btn-success my-3" type="submit">Edit</button>
+        {% endif %}
+    </div>
+</form>
+
+
+{% if user.company %}
+<div class="card container shadow my-5 p-3">
+    <h3 class="display-6 text-center text-success"> <a href="/" class="text-success"> << Jobs list</a> / Appliers for this job</h3>
+    <div class="card-body">
+        <table class="table table-light table-striped shadow-lg table-responsive-lg">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Full name</th>
+                    <th scope="col">Job title</th>
+                    <th scope="col">Phone number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">File</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if job.applications.all|length > 0 %}
+                    
+                    {% for dev in job.applications.all %}
+                        <tr>
+                            <th scope="row">{{ dev.id }}</th>
+                            <td>{{ dev.first_name }} {{ dev.last_name }}</td>
+                            <td>{{ dev.job_title }}</td>
+                            <td>{{ dev.phone_number }}</td>
+                            <td>{{ dev.email }}</td>
+                            <td><a href="/media/{{ dev.cv }}" download>Download file</a></td>
+                            <td class="d-flex justify-content-evenly">
+                                {% if not job.accepted_dev %}
+                                    <form action="/job/{{ job.id }}/accept/{{ dev.id }}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success" onclick="window.alert('Are you sure to accept this devloper on your job ?')">Accept</button>
+                                    </form>
+                                    <form action="/job/{{ job.id }}/decline/{{ dev.id }}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger" onclick="window.alert('Are you sure to decline ?')">Decline</button>
+                                    </form>
+                                {% else %}
+                                    <button disabled class="btn btn-secondary">Accept</button>
+                                    <button disabled class="btn btn-secondary">Decline</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <h3 class="text-center text-danger my-2">No appliers found</h3>
+                {% endif %}
+                {% if job.accepted_dev %}
+                    <h3 class="text-left text-success lead">{{ job.accepted_dev }} has been accepted for this job !</h3>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

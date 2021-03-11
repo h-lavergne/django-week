@@ -1,0 +1,21 @@
+{% extends "../base.html" %}
+
+{% block title %}Django app - Home page{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mb-4">
+    <div class="card shadow big" style="border-radius: 12px">
+        <div class="card-body p-2 my-4">
+            <div class="container-fluid d-flex align-items-center justify-content-between px-5">
+                <div>
+                    <h2>{{ dev }}</h2>
+                    <h4>{{ dev.title }}</h4>
+                    <p class="lead mt-2">{{ dev.phone_number }}<p>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+{% endblock %}
