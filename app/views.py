@@ -172,9 +172,9 @@ def decline_dev_on_job(request, job_id, dev_id):
             job.save()
             send_mail(
                 'Application to job offer : ' + job.title,
-                'Hello ' + job.accepted_dev.first_name + ' ' + job.accepted_dev.last_name + ', we are sorry to tell you that your application have been declined by' + job.company.name + '.',
+                'Hello ' + dev.first_name + ' ' + dev.last_name + ', we are sorry to tell you that your application have been declined by' + job.company.name + '.',
                 job.company.user.email,
-                [job.accepted_dev.user.email],
+                [dev.user.email],
                 fail_silently=False,
             )
             messages.success(request, 'You have decline this developer on your job offer')
@@ -218,7 +218,7 @@ def register_company(request):
 
 def register_developer(request):
     if request.method == 'POST':
-        form = DeveloperRegisterForm(request.POST)
+        form = DeveloperRegisterForm(request.POST, request.FILES)
         if form.is_valid():
             user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
             dev = Developer()
@@ -242,10 +242,10 @@ def register_developer(request):
 
 def login(request):
     if request.user.is_authenticated:
-        if request.user.dev != None :
+        if hasattr(request.user, 'dev') :
             return redirect('/developer')
         
-        if request.user.company :
+        if hasattr(request.user, 'company') :
             return redirect('/company')
     
     if request.method == 'POST':
